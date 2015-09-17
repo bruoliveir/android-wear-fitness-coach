@@ -20,6 +20,10 @@ public class MainActivity extends WearableActivity {
     private int mCurrentSet = 0;
     private int mTotalSets = 5;
 
+    private Vibrator mVibrator;
+    private final long[] vibrationPattern = {0, 500, 50, 500, 50, 500};
+    private final int indexInPatternToRepeat = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,8 @@ public class MainActivity extends WearableActivity {
 
         mTextViewClock.setText(getString(R.string.clock_ready));
         mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
+
+        mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         mButtonFinishSet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,23 +58,27 @@ public class MainActivity extends WearableActivity {
                 mCountDownTimer = new CountDownTimer(start + 1000, step) {
                     @Override
                     public void onTick(long l) {
-                        mTextViewClock.setText("" + (l / 1000));
+                        mTextViewClock.setText(String.valueOf(l / 1000));
                     }
 
                     @Override
                     public void onFinish() {
                         mTextViewClock.setText(getString(R.string.clock_go));
 
-                        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                        long[] vibrationPattern = {0, 500, 50, 500, 50, 500};
-                        final int indexInPatternToRepeat = -1;
-                        vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
+                        mVibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
                     }
                 };
 
                 mCountDownTimer.start();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mCountDownTimer != null) mCountDownTimer.cancel();
+
+        super.onDestroy();
     }
 
     @Override
