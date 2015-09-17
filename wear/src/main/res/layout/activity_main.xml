@@ -11,13 +11,13 @@
     tools:deviceIds="wear">
 
     <Button
-        android:id="@+id/complete"
+        android:id="@+id/finish_set"
         app:layout_box="all"
         android:layout_gravity="center_horizontal|top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:text="@string/complete"
+        android:text="@string/button_finish_set"
         android:textColor="@android:color/secondary_text_dark"
         android:textSize="24sp"/>
 

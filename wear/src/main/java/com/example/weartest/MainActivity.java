@@ -14,7 +14,7 @@ public class MainActivity extends WearableActivity {
     private BoxInsetLayout mContainerView;
     private TextView mTextViewClock;
     private TextView mTextViewSets;
-    private Button mButtonComplete;
+    private Button mButtonFinishSet;
 
     private CountDownTimer mCountDownTimer;
     private int mCurrentSet = 0;
@@ -29,11 +29,12 @@ public class MainActivity extends WearableActivity {
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
         mTextViewClock = (TextView) findViewById(R.id.clock);
         mTextViewSets = (TextView) findViewById(R.id.sets);
-        mButtonComplete = (Button) findViewById(R.id.complete);
+        mButtonFinishSet = (Button) findViewById(R.id.finish_set);
 
-        mTextViewSets = (TextView) findViewById(R.id.sets);
+        mTextViewClock.setText(getString(R.string.clock_ready));
+        mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
 
-        mButtonComplete.setOnClickListener(new View.OnClickListener() {
+        mButtonFinishSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mCountDownTimer != null) mCountDownTimer.cancel();
@@ -41,11 +42,11 @@ public class MainActivity extends WearableActivity {
                 mCurrentSet++;
                 mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
                 if (mCurrentSet >= mTotalSets) {
-                    mTextViewClock.setText("DONE!");
+                    mTextViewClock.setText(getString(R.string.clock_done));
                     return;
                 }
 
-                long start = 10000;
+                long start = 15000;
                 long step = 1000;
 
                 mCountDownTimer = new CountDownTimer(start + 1000, step) {
@@ -56,7 +57,7 @@ public class MainActivity extends WearableActivity {
 
                     @Override
                     public void onFinish() {
-                        mTextViewClock.setText("GOGOGO");
+                        mTextViewClock.setText(getString(R.string.clock_go));
 
                         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                         long[] vibrationPattern = {0, 500, 50, 500, 50, 500};
@@ -93,13 +94,15 @@ public class MainActivity extends WearableActivity {
             mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
             mTextViewClock.setTextColor(getResources().getColor(android.R.color.white));
             mTextViewSets.setTextColor(getResources().getColor(android.R.color.white));
+            mButtonFinishSet.setVisibility(View.GONE);
 
-            mTextViewClock.setText(getString(R.string.clock));
-            mTextViewSets.setText(getString(R.string.sets));
+            //mTextViewClock.setText();
+            mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
         } else {
             mContainerView.setBackgroundColor(getResources().getColor(R.color.main_background));
             mTextViewClock.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
             mTextViewSets.setTextColor(getResources().getColor(android.R.color.secondary_text_dark));
+            mButtonFinishSet.setVisibility(View.VISIBLE);
         }
     }
 }
