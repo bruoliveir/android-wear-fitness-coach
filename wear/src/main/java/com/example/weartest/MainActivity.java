@@ -42,7 +42,7 @@ public class MainActivity extends WearableActivity {
                     return;
                 }
 
-                long start = 10000;
+                long start = 60000;
                 long step = 1000;
 
                 mCountDownTimer = new CountDownTimer(start + 1000, step) {
