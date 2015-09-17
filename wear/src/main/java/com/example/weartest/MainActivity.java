@@ -5,7 +5,6 @@ import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
-import android.text.method.CharacterPickerDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,8 +36,11 @@ public class MainActivity extends WearableActivity {
             public void onClick(View view) {
 
                 mCurrentSet++;
-                if (mCurrentSet >= 10) mTextViewClock.setText("ALL DONE!");
                 mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
+                if (mCurrentSet >= mTotalSets) {
+                    mTextViewClock.setText("DONE!");
+                    return;
+                }
 
                 long start = 10000;
                 long step = 1000;
@@ -51,7 +53,7 @@ public class MainActivity extends WearableActivity {
 
                     @Override
                     public void onFinish() {
-                        mTextViewClock.setText("GO GO GO");
+                        mTextViewClock.setText("GOGOGO");
 
                         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                         long[] vibrationPattern = {0, 500, 50, 500, 50, 500};

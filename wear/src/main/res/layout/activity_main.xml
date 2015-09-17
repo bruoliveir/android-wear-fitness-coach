@@ -24,9 +24,10 @@
     <TextView
         android:id="@+id/clock"
         app:layout_box="all"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="@string/clock"
         android:textColor="@android:color/primary_text_dark"
         android:textSize="48sp"/>
@@ -37,6 +38,8 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
         android:text="@string/sets"
         android:textColor="@android:color/secondary_text_dark"
         android:textSize="24sp"/>
