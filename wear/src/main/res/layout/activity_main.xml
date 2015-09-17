@@ -2,15 +2,43 @@
 <android.support.wearable.view.BoxInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:id="@+id/container" tools:context=".MainActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    tools:context=".MainActivity"
     tools:deviceIds="wear">
 
-    <TextView android:id="@+id/text" app:layout_box="all" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:text="@string/hello_world" />
+    <Button
+        android:id="@+id/complete"
+        app:layout_box="all"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/complete"
+        android:textColor="@android:color/secondary_text_dark"
+        android:textSize="24sp"/>
 
-    <TextView android:id="@+id/clock" app:layout_box="all" android:layout_gravity="bottom|start"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:textColor="@android:color/white" />
+    <TextView
+        android:id="@+id/clock"
+        app:layout_box="all"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clock"
+        android:textColor="@android:color/primary_text_dark"
+        android:textSize="48sp"/>
+
+    <TextView
+        android:id="@+id/sets"
+        app:layout_box="all"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sets"
+        android:textColor="@android:color/secondary_text_dark"
+        android:textSize="24sp"/>
 
 </android.support.wearable.view.BoxInsetLayout>
