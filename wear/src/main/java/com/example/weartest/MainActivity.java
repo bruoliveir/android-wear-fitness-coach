@@ -2,6 +2,7 @@ package com.example.weartest;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.PowerManager;
 import android.os.Vibrator;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
@@ -66,6 +67,14 @@ public class MainActivity extends WearableActivity {
                         mTextViewClock.setText(getString(R.string.clock_go));
 
                         mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
+
+                        //PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+                        //PowerManager.WakeLock wl = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
+                        //wl.acquire();
+                        //wl.release();
+                        ((PowerManager) getSystemService(POWER_SERVICE))
+                                .newWakeLock(PowerManager.FULL_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG")
+                                .acquire();
                     }
                 };
 
