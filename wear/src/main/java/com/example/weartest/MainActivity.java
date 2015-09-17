@@ -18,7 +18,7 @@ public class MainActivity extends WearableActivity {
 
     private CountDownTimer mCountDownTimer;
     private int mCurrentSet = 0;
-    private int mTotalSets = 10;
+    private int mTotalSets = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,12 @@ public class MainActivity extends WearableActivity {
         mTextViewSets = (TextView) findViewById(R.id.sets);
         mButtonComplete = (Button) findViewById(R.id.complete);
 
+        mTextViewSets = (TextView) findViewById(R.id.sets);
+
         mButtonComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (mCountDownTimer != null) mCountDownTimer.cancel();
 
                 mCurrentSet++;
                 mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
@@ -42,7 +45,7 @@ public class MainActivity extends WearableActivity {
                     return;
                 }
 
-                long start = 60000;
+                long start = 10000;
                 long step = 1000;
 
                 mCountDownTimer = new CountDownTimer(start + 1000, step) {
