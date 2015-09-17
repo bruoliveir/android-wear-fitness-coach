@@ -21,8 +21,8 @@ public class MainActivity extends WearableActivity {
     private int mTotalSets = 5;
 
     private Vibrator mVibrator;
-    private final long[] vibrationPattern = {0, 500, 50, 500, 50, 500};
-    private final int indexInPatternToRepeat = -1;
+    private final long[] mVibrationPattern = {0, 400, 100, 200, 100, 200};
+    private final int mIndexInPatternToRepeat = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class MainActivity extends WearableActivity {
                     return;
                 }
 
-                long start = 15000;
+                long start = 60000;
                 long step = 1000;
 
                 mCountDownTimer = new CountDownTimer(start + 1000, step) {
@@ -65,7 +65,7 @@ public class MainActivity extends WearableActivity {
                     public void onFinish() {
                         mTextViewClock.setText(getString(R.string.clock_go));
 
-                        mVibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
+                        mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
                     }
                 };
 
