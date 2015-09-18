@@ -1,5 +1,6 @@
 package com.example.weartest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PowerManager;
@@ -19,7 +20,7 @@ public class MainActivity extends WearableActivity {
 
     private CountDownTimer mCountDownTimer;
     private int mCurrentSet = 0;
-    private int mTotalSets = 5;
+    private int mTotalSets;
 
     private Vibrator mVibrator;
     private final long[] mVibrationPattern = {0, 400, 100, 200, 100, 200};
@@ -30,6 +31,10 @@ public class MainActivity extends WearableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setAmbientEnabled();
+
+        Intent intent = getIntent();
+        String numberOfSets = intent.getStringExtra(SetsActivity.NUMBER_OF_SETS);
+        mTotalSets = Integer.parseInt(numberOfSets);
 
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
         mTextViewClock = (TextView) findViewById(R.id.clock);

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.example.weartest.SetsActivity"
+    tools:deviceIds="wear_round">
+
+    <android.support.wearable.view.WearableListView
+        android:id="@+id/wearable_list"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true">
+    </android.support.wearable.view.WearableListView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/wearable_list"
+        android:text="@string/sets_text"
+        android:textColor="@android:color/black"/>
+</RelativeLayout>
