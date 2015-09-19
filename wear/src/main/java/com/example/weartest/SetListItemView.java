@@ -31,8 +31,8 @@ public class SetListItemView extends LinearLayout implements WearableListView.On
         mCenterPositionTextColor = getResources().getColor(android.R.color.black);
         mNonCenterPositionTextColor = getResources().getColor(android.R.color.darker_gray);
 
-        mCenterPositionTextSize = 24;
-        mNonCenterPositionTextSize = 20;
+        mCenterPositionTextSize = 44;
+        mNonCenterPositionTextSize = 24;
     }
 
     @Override

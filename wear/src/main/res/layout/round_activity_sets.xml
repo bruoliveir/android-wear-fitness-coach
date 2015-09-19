@@ -9,16 +9,16 @@
 
     <android.support.wearable.view.WearableListView
         android:id="@+id/wearable_list"
-        android:layout_width="60dp"
+        android:layout_width="180dp"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true">
-    </android.support.wearable.view.WearableListView>
+        android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/wearable_list"
+        android:layout_alignRight="@id/wearable_list"
         android:text="@string/sets_text"
+        android:textSize="18sp"
         android:textColor="@android:color/black"/>
 </RelativeLayout>
