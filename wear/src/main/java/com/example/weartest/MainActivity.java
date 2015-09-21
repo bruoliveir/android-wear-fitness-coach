@@ -1,9 +1,9 @@
 package com.example.weartest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.PowerManager;
 import android.os.Vibrator;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends WearableActivity {
+
+    private Context mContext;
 
     private BoxInsetLayout mContainerView;
     private TextView mTextViewClock;
@@ -31,6 +33,8 @@ public class MainActivity extends WearableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setAmbientEnabled();
+
+        mContext = this;
 
         Intent intent = getIntent();
         String numberOfSets = intent.getStringExtra(SetsActivity.NUMBER_OF_SETS);
@@ -73,13 +77,7 @@ public class MainActivity extends WearableActivity {
 
                         mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
 
-                        //PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-                        //PowerManager.WakeLock wl = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
-                        //wl.acquire();
-                        //wl.release();
-                        ((PowerManager) getSystemService(POWER_SERVICE))
-                                .newWakeLock(PowerManager.FULL_WAKE_LOCK|PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG")
-                                .acquire();
+                        Utils.turnScreenOn(mContext);
                     }
                 };
 
