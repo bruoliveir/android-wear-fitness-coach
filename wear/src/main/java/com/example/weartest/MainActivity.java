@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Vibrator;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends WearableActivity {
 
@@ -21,12 +23,18 @@ public class MainActivity extends WearableActivity {
     private Button mButtonFinishSet;
 
     private CountDownTimer mCountDownTimer;
+    private static final long mCountDownStep = 1000;
     private int mCurrentSet = 0;
     private int mTotalSets;
 
-    private Vibrator mVibrator;
-    private final long[] mVibrationPattern = {0, 400, 100, 200, 100, 200};
-    private final int mIndexInPatternToRepeat = -1;
+    private static final long[] mVibrationPatternFinishSet = {0, 400, 100, 200, 100, 200, 100, 200};
+    private static final long[] mVibrationPatternReminder = {0, 400, 50, 200};
+    private static final int mVibrationReminderDelay = 45000;
+    private static final int mVibrationReminderInterval = 10000;
+    private static final int mIndexInPatternToRepeat = -1;
+    private static final int mTimerRepeatCount = 3;
+
+    private Timer mTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +56,11 @@ public class MainActivity extends WearableActivity {
         mTextViewClock.setText(getString(R.string.clock_ready));
         mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
 
-        mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-
         mButtonFinishSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mCountDownTimer != null) mCountDownTimer.cancel();
+                if (mTimer != null) mTimer.cancel();
 
                 mCurrentSet++;
                 mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
@@ -62,10 +69,9 @@ public class MainActivity extends WearableActivity {
                     return;
                 }
 
-                long start = 60000;
-                long step = 1000;
+                long start = 45000;
 
-                mCountDownTimer = new CountDownTimer(start + 1000, step) {
+                mCountDownTimer = new CountDownTimer(start + 1000, mCountDownStep) {
                     @Override
                     public void onTick(long l) {
                         mTextViewClock.setText(String.valueOf(l / 1000));
@@ -75,9 +81,24 @@ public class MainActivity extends WearableActivity {
                     public void onFinish() {
                         mTextViewClock.setText(getString(R.string.clock_go));
 
-                        mVibrator.vibrate(mVibrationPattern, mIndexInPatternToRepeat);
+                        Utils.vibrate(mContext, mVibrationPatternFinishSet, mIndexInPatternToRepeat);
 
                         Utils.turnScreenOn(mContext);
+
+                        mTimer = new Timer();
+                        mTimer.scheduleAtFixedRate(new TimerTask() {
+                            int repeatCount = mTimerRepeatCount;
+
+                            @Override
+                            public void run() {
+                                if (repeatCount > 0) {
+                                    Utils.vibrate(mContext, mVibrationPatternReminder, mIndexInPatternToRepeat);
+                                    repeatCount--;
+                                } else {
+                                    this.cancel();
+                                }
+                            }
+                        }, mVibrationReminderDelay, mVibrationReminderInterval);
                     }
                 };
 
@@ -89,6 +110,7 @@ public class MainActivity extends WearableActivity {
     @Override
     protected void onDestroy() {
         if (mCountDownTimer != null) mCountDownTimer.cancel();
+        if (mTimer != null) mTimer.cancel();
 
         super.onDestroy();
     }
