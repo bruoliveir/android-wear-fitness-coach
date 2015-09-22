@@ -34,7 +34,7 @@ public class SettingsActivity extends Activity {
 
         mContext = this;
 
-        mGridViewPager = (GridViewPager) findViewById(R.id.activity_settings_gridviewpager);
+        mGridViewPager = (GridViewPager) findViewById(R.id.settings_gridviewpager);
         mGridViewPager.setAdapter(new SettingsGridPagerAdapter());
     }
 
@@ -59,7 +59,7 @@ public class SettingsActivity extends Activity {
                 case 0:
                     view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_gridviewpager_item_sets, viewGroup, false);
 
-                    WearableListView wearableListViewSets = (WearableListView) view.findViewById(R.id.activity_sets_sets_wearablelistview);
+                    WearableListView wearableListViewSets = (WearableListView) view.findViewById(R.id.settings_gridviewpager_item_wearablelistview_sets);
                     wearableListViewSets.setGreedyTouchMode(true);
                     wearableListViewSets.setAdapter(new WearableListViewAdapter(mContext, ARRAY_NUMBER_OF_SETS));
                     wearableListViewSets.setClickListener(new WearableListView.ClickListener() {
@@ -80,13 +80,13 @@ public class SettingsActivity extends Activity {
                         }
                     });
                     wearableListViewSets.scrollToPosition(Utils.getSharedPreferences(mContext)
-                            .getInt(getString(R.string.shared_preferences_number_of_sets), (ARRAY_NUMBER_OF_SETS.length / 2) - 1));
+                            .getInt(getString(R.string.shared_preferences_settings_number_of_sets), (ARRAY_NUMBER_OF_SETS.length / 2) - 1));
                     viewGroup.addView(view);
                     break;
                 case 1:
                     view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_gridviewpager_item_rest, viewGroup, false);
 
-                    WearableListView wearableListViewRest = (WearableListView) view.findViewById(R.id.activity_sets_rest_wearablelistview);
+                    WearableListView wearableListViewRest = (WearableListView) view.findViewById(R.id.settings_gridviewpager_item_wearablelistview_rest);
                     wearableListViewRest.setGreedyTouchMode(true);
                     wearableListViewRest.setAdapter(new WearableListViewAdapter(mContext, ARRAY_REST_TIME));
                     wearableListViewRest.setClickListener(new WearableListView.ClickListener() {
@@ -107,19 +107,19 @@ public class SettingsActivity extends Activity {
                         }
                     });
                     wearableListViewRest.scrollToPosition(Utils.getSharedPreferences(mContext)
-                            .getInt(getString(R.string.shared_preferences_rest_time), (ARRAY_NUMBER_OF_SETS.length / 2) - 1));
+                            .getInt(getString(R.string.shared_preferences_settings_rest_time), (ARRAY_NUMBER_OF_SETS.length / 2) - 1));
                     viewGroup.addView(view);
                     break;
                 case 2:
                     view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_gridviewpager_item_done, viewGroup, false);
-                    CircledImageView circledImageView = (CircledImageView) view.findViewById(R.id.activity_settings_circledimageview_done);
+                    CircledImageView circledImageView = (CircledImageView) view.findViewById(R.id.settings_circledimageview_done);
                     circledImageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
 
                             Utils.getSharedPreferencesEditor(mContext)
-                                    .putInt(getString(R.string.shared_preferences_number_of_sets), mSelectedNumberOfSets)
-                                    .putInt(getString(R.string.shared_preferences_rest_time), mSelectedRestTime)
+                                    .putInt(getString(R.string.shared_preferences_settings_number_of_sets), mSelectedNumberOfSets)
+                                    .putInt(getString(R.string.shared_preferences_settings_rest_time), mSelectedRestTime)
                                     .commit();
 
                             Intent intent = new Intent(mContext, MainActivity.class);

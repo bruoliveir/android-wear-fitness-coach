@@ -8,7 +8,7 @@
     tools:deviceIds="wear">
 
     <android.support.wearable.view.WearableListView
-        android:id="@+id/activity_sets_rest_wearablelistview"
+        android:id="@+id/settings_gridviewpager_item_wearablelistview_rest"
         android:layout_width="180dp"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"/>
@@ -17,8 +17,8 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@id/activity_sets_rest_wearablelistview"
-        android:text="@string/rest_text"
+        android:layout_alignRight="@id/settings_gridviewpager_item_wearablelistview_rest"
+        android:text="@string/settings_gridviewpager_item_textview_rest"
         android:textSize="18sp"
         android:textColor="@android:color/black"/>
 </RelativeLayout>

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class WearableListViewItem extends LinearLayout implements WearableListView.OnCenterProximityListener {
 
-    private TextView mTextViewNumber;
+    private TextView mTextView;
 
     private final int mCenterPositionTextColor;
     private final int mNonCenterPositionTextColor;
@@ -39,18 +39,18 @@ public class WearableListViewItem extends LinearLayout implements WearableListVi
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mTextViewNumber = (TextView) findViewById(R.id.number);
+        mTextView = (TextView) findViewById(R.id.settings_wearablelistview_item_textview);
     }
 
     @Override
     public void onCenterPosition(boolean animate) {
-        mTextViewNumber.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mCenterPositionTextSize);
-        mTextViewNumber.setTextColor(mCenterPositionTextColor);
+        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mCenterPositionTextSize);
+        mTextView.setTextColor(mCenterPositionTextColor);
     }
 
     @Override
     public void onNonCenterPosition(boolean animate) {
-        mTextViewNumber.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mNonCenterPositionTextSize);
-        mTextViewNumber.setTextColor(mNonCenterPositionTextColor);
+        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mNonCenterPositionTextSize);
+        mTextView.setTextColor(mNonCenterPositionTextColor);
     }
 }

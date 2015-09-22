@@ -2,7 +2,6 @@
 <android.support.wearable.view.BoxInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/watch_view_stub"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.weartest.SettingsActivity"
@@ -10,7 +9,7 @@
 
     <android.support.wearable.view.GridViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/activity_settings_gridviewpager"
+        android:id="@+id/settings_gridviewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </android.support.wearable.view.BoxInsetLayout>

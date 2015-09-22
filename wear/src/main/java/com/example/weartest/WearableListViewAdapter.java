@@ -23,7 +23,7 @@ final class WearableListViewAdapter extends WearableListView.Adapter {
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            textViewNumber = (TextView) itemView.findViewById(R.id.number);
+            textViewNumber = (TextView) itemView.findViewById(R.id.settings_wearablelistview_item_textview);
         }
     }
 

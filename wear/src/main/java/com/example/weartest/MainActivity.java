@@ -51,12 +51,12 @@ public class MainActivity extends WearableActivity {
         mTotalSets = Integer.parseInt(numberOfSets);
         mRestTime = Integer.parseInt(restTime) * 1000;
 
-        mContainerView = (BoxInsetLayout) findViewById(R.id.container);
-        mTextViewClock = (TextView) findViewById(R.id.clock);
+        mContainerView = (BoxInsetLayout) findViewById(R.id.main_boxinsetlayout);
+        mTextViewClock = (TextView) findViewById(R.id.main_textview_clock);
         mTextViewSets = (TextView) findViewById(R.id.sets);
-        mButtonFinishSet = (Button) findViewById(R.id.finish_set);
+        mButtonFinishSet = (Button) findViewById(R.id.main_button_finish);
 
-        mTextViewClock.setText(getString(R.string.clock_ready));
+        mTextViewClock.setText(getString(R.string.main_textview_clock_ready));
         mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
 
         mButtonFinishSet.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@ public class MainActivity extends WearableActivity {
                 mCurrentSet++;
                 mTextViewSets.setText(mCurrentSet + "/" + mTotalSets);
                 if (mCurrentSet >= mTotalSets) {
-                    mTextViewClock.setText(getString(R.string.clock_done));
+                    mTextViewClock.setText(getString(R.string.main_textview_clock_done));
                     return;
                 }
 
@@ -80,7 +80,7 @@ public class MainActivity extends WearableActivity {
 
                     @Override
                     public void onFinish() {
-                        mTextViewClock.setText(getString(R.string.clock_go));
+                        mTextViewClock.setText(getString(R.string.main_textview_clock_go));
 
                         Utils.vibrate(mContext, mVibrationPatternFinishSet, mIndexInPatternToRepeat);
 

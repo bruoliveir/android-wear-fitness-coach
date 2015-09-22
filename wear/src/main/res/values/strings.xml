@@ -2,19 +2,17 @@
     <string name="app_name">WearTest</string>
 
     <!-- Main -->
-    <string name="clock">00</string>
-    <string name="sets">00/00</string>
-    <string name="clock_ready">READY?</string>
-    <string name="clock_go">GOGOGO</string>
-    <string name="clock_done">DONE!</string>>
-    <string name="button_finish_set">FINISH SET</string>
+    <string name="main_textview_clock_ready">READY?</string>
+    <string name="main_textview_clock_go">GOGOGO</string>
+    <string name="main_textview_clock_done">DONE!</string>>
+    <string name="main_button_finish">FINISH SET</string>
 
     <!-- Settings -->
-    <string name="sets_text">SETS</string>
-    <string name="rest_text">REST</string>
+    <string name="settings_gridviewpager_item_textview_sets">SETS</string>
+    <string name="settings_gridviewpager_item_textview_rest">REST</string>
 
     <!-- SharedPreferences -->
     <string name="shared_preferences_file_key">com.example.weartest</string>
-    <string name="shared_preferences_number_of_sets">number_of_sets</string>
-    <string name="shared_preferences_rest_time">rest_time</string>
+    <string name="shared_preferences_settings_number_of_sets">number_of_sets</string>
+    <string name="shared_preferences_settings_rest_time">rest_time</string>
 </resources>
