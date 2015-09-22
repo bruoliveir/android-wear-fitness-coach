@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-final class SetsAdapter extends WearableListView.Adapter {
+final class WearableListViewAdapter extends WearableListView.Adapter {
     private String[] mItems;
     private final Context mContext;
     private final LayoutInflater mInflater;
 
-    public SetsAdapter(Context context, String[] items) {
+    public WearableListViewAdapter(Context context, String[] items) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
         mItems = items;
@@ -29,7 +29,7 @@ final class SetsAdapter extends WearableListView.Adapter {
 
     @Override
     public WearableListView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ItemViewHolder(mInflater.inflate(R.layout.list_item_sets, null));
+        return new ItemViewHolder(mInflater.inflate(R.layout.activity_settings_wearablelistview_item, null));
     }
 
     @Override

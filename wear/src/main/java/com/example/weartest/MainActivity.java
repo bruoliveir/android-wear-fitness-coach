@@ -24,6 +24,7 @@ public class MainActivity extends WearableActivity {
 
     private CountDownTimer mCountDownTimer;
     private static final long mCountDownStep = 1000;
+    private long mRestTime;
     private int mCurrentSet = 0;
     private int mTotalSets;
 
@@ -45,8 +46,10 @@ public class MainActivity extends WearableActivity {
         mContext = this;
 
         Intent intent = getIntent();
-        String numberOfSets = intent.getStringExtra(SetsActivity.NUMBER_OF_SETS);
+        String numberOfSets = intent.getStringExtra(SettingsActivity.NUMBER_OF_SETS);
+        String restTime = intent.getStringExtra(SettingsActivity.REST_TIME);
         mTotalSets = Integer.parseInt(numberOfSets);
+        mRestTime = Integer.parseInt(restTime) * 1000;
 
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
         mTextViewClock = (TextView) findViewById(R.id.clock);
@@ -69,9 +72,7 @@ public class MainActivity extends WearableActivity {
                     return;
                 }
 
-                long start = 45000;
-
-                mCountDownTimer = new CountDownTimer(start + 1000, mCountDownStep) {
+                mCountDownTimer = new CountDownTimer(mRestTime + 1000, mCountDownStep) {
                     @Override
                     public void onTick(long l) {
                         mTextViewClock.setText(String.valueOf(l / 1000));

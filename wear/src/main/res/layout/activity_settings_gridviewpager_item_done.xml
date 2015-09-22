@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.example.weartest.SettingsActivity"
+    tools:deviceIds="wear">
+
+    <android.support.wearable.view.CircledImageView
+        android:id="@+id/activity_settings_circledimageview_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_full_cancel"
+        app:circle_color="@color/main_background"
+        app:circle_radius="52dp"/>
+</RelativeLayout>

@@ -7,7 +7,7 @@ import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SetListItemView extends LinearLayout implements WearableListView.OnCenterProximityListener {
+public class WearableListViewItem extends LinearLayout implements WearableListView.OnCenterProximityListener {
 
     private TextView mTextViewNumber;
 
@@ -17,15 +17,15 @@ public class SetListItemView extends LinearLayout implements WearableListView.On
     private final int mCenterPositionTextSize;
     private final int mNonCenterPositionTextSize;
 
-    public SetListItemView(Context context) {
+    public WearableListViewItem(Context context) {
         this(context, null);
     }
 
-    public SetListItemView(Context context, AttributeSet attrs) {
+    public WearableListViewItem(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SetListItemView(Context context, AttributeSet attrs, int defStyle) {
+    public WearableListViewItem(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         mCenterPositionTextColor = getResources().getColor(android.R.color.black);

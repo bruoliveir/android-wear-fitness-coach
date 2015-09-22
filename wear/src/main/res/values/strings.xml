@@ -9,10 +9,12 @@
     <string name="clock_done">DONE!</string>>
     <string name="button_finish_set">FINISH SET</string>
 
-    <!-- Sets -->
+    <!-- Settings -->
     <string name="sets_text">SETS</string>
+    <string name="rest_text">REST</string>
 
     <!-- SharedPreferences -->
     <string name="shared_preferences_file_key">com.example.weartest</string>
     <string name="shared_preferences_number_of_sets">number_of_sets</string>
+    <string name="shared_preferences_rest_time">rest_time</string>
 </resources>

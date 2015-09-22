@@ -1,4 +1,4 @@
-<com.example.weartest.SetListItemView
+<com.example.weartest.WearableListViewItem
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,4 +11,4 @@
         android:gravity="center"
         android:textColor="@android:color/black"
         android:textSize="44sp"/>
-</com.example.weartest.SetListItemView>
+</com.example.weartest.WearableListViewItem>

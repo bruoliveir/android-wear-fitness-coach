@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.example.weartest.SetsActivity"
-    tools:deviceIds="wear_square">
+    tools:context="com.example.weartest.SettingsActivity"
+    tools:deviceIds="wear">
 
     <android.support.wearable.view.WearableListView
-        android:id="@+id/wearable_list"
+        android:id="@+id/activity_sets_rest_wearablelistview"
         android:layout_width="180dp"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"/>
@@ -17,8 +17,8 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@id/wearable_list"
-        android:text="@string/sets_text"
+        android:layout_alignRight="@id/activity_sets_rest_wearablelistview"
+        android:text="@string/rest_text"
         android:textSize="18sp"
         android:textColor="@android:color/black"/>
 </RelativeLayout>
