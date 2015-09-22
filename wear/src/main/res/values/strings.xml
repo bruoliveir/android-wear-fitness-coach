@@ -11,4 +11,8 @@
 
     <!-- Sets -->
     <string name="sets_text">SETS</string>
+
+    <!-- SharedPreferences -->
+    <string name="shared_preferences_file_key">com.example.weartest</string>
+    <string name="shared_preferences_number_of_sets">number_of_sets</string>
 </resources>

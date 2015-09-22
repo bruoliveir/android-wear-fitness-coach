@@ -28,6 +28,9 @@ public class SetsActivity extends Activity implements WearableListView.ClickList
                 WearableListView listView = (WearableListView) findViewById(R.id.wearable_list);
                 listView.setAdapter(new SetsAdapter(mContext, elements));
                 listView.setClickListener((WearableListView.ClickListener) mContext);
+
+                listView.scrollToPosition(Utils.getSharedPreferences(mContext)
+                        .getInt(getString(R.string.shared_preferences_number_of_sets), (elements.length / 2) - 1));
             }
         });
     }
@@ -35,6 +38,10 @@ public class SetsActivity extends Activity implements WearableListView.ClickList
     @Override
     public void onClick(WearableListView.ViewHolder v) {
         Integer tag = (Integer) v.itemView.getTag();
+
+        Utils.getSharedPreferencesEditor(mContext)
+                .putInt(getString(R.string.shared_preferences_number_of_sets), tag)
+                .commit();
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(NUMBER_OF_SETS, elements[tag]);
