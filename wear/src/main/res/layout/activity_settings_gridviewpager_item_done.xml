@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="24dp"
-        android:src="@drawable/ic_full_cancel"
+        android:src="@mipmap/ic_arrow_forward"
         app:circle_color="@color/main_background"
         app:circle_radius="52dp"/>
 </RelativeLayout>
