@@ -10,5 +10,5 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textColor="@android:color/black"
-        android:textSize="44sp"/>
+        android:textSize="24sp"/>
 </com.example.weartest.WearableListViewItem>

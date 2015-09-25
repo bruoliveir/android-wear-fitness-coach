@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.wearable.view.CircledImageView;
-import android.support.wearable.view.GridPagerAdapter;
-import android.support.wearable.view.GridViewPager;
 import android.support.wearable.view.WearableListView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class SettingsActivity extends Activity {
 
@@ -22,7 +23,7 @@ public class SettingsActivity extends Activity {
 
     private Context mContext;
 
-    private GridViewPager mGridViewPager;
+    private ViewPager mViewPager;
 
     private int mSelectedNumberOfSets;
     private int mSelectedRestTime;
@@ -34,38 +35,45 @@ public class SettingsActivity extends Activity {
 
         mContext = this;
 
-        mGridViewPager = (GridViewPager) findViewById(R.id.settings_gridviewpager);
-        mGridViewPager.setAdapter(new SettingsGridPagerAdapter());
+        mViewPager = (ViewPager) findViewById(R.id.settings_viewpager);
+        mViewPager.setAdapter(new SettingsPagerAdapter());
+        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.settings_viewpager_page_margin));
+        mViewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                final float normalizedPosition = Math.abs(Math.abs(position) - 1);
+                page.setScaleX(normalizedPosition / 2 + 0.5f);
+                page.setScaleY(normalizedPosition / 2 + 0.5f);
+            }
+        });
     }
 
-    public class SettingsGridPagerAdapter extends GridPagerAdapter {
+    public class SettingsPagerAdapter extends PagerAdapter {
 
         @Override
-        public int getRowCount() {
-            return 1;
-        }
-
-        @Override
-        public int getColumnCount(int i) {
-            return 3;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup viewGroup, int row, final int column) {
+        public Object instantiateItem(ViewGroup container, final int position) {
 
             View view = null;
 
-            switch (column) {
-                case 0:
-                    view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_gridviewpager_item_sets, viewGroup, false);
+            TextView textView;
+            WearableListView wearableListView;
+            CircledImageView circledImageView;
 
-                    WearableListView wearableListViewSets = (WearableListView) view.findViewById(R.id.settings_gridviewpager_item_wearablelistview_sets);
-                    wearableListViewSets.setGreedyTouchMode(true);
-                    wearableListViewSets.setAdapter(new WearableListViewAdapter(mContext, ARRAY_NUMBER_OF_SETS));
-                    wearableListViewSets.setClickListener(new WearableListView.ClickListener() {
+            switch (position) {
+                case 0:
+                    view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_viewpager_page_list, container, false);
+
+                    textView = (TextView) view.findViewById(R.id.settings_viewpager_page_textview);
+                    textView.setText(getString(R.string.settings_gridviewpager_item_textview_sets));
+
+                    wearableListView = (WearableListView) view.findViewById(R.id.settings_viewpager_page_wearablelistview);
+                    wearableListView.setGreedyTouchMode(true);
+                    wearableListView.setAdapter(new WearableListViewAdapter(mContext, ARRAY_NUMBER_OF_SETS));
+                    wearableListView.setClickListener(new WearableListView.ClickListener() {
                         @Override
                         public void onClick(WearableListView.ViewHolder viewHolder) {
-                            mGridViewPager.setCurrentItem(0, column + 1, true);
+                            mViewPager.setCurrentItem(position + 1, true);
                         }
 
                         @Override
@@ -73,26 +81,29 @@ public class SettingsActivity extends Activity {
 
                         }
                     });
-                    wearableListViewSets.addOnCentralPositionChangedListener(new WearableListView.OnCentralPositionChangedListener() {
+                    wearableListView.addOnCentralPositionChangedListener(new WearableListView.OnCentralPositionChangedListener() {
                         @Override
                         public void onCentralPositionChanged(int i) {
                             mSelectedNumberOfSets = i;
                         }
                     });
-                    wearableListViewSets.scrollToPosition(Utils.getSharedPreferences(mContext)
+                    wearableListView.scrollToPosition(Utils.getSharedPreferences(mContext)
                             .getInt(getString(R.string.shared_preferences_settings_number_of_sets), (ARRAY_NUMBER_OF_SETS.length / 2) - 1));
-                    viewGroup.addView(view);
+                    container.addView(view);
                     break;
                 case 1:
-                    view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_gridviewpager_item_rest, viewGroup, false);
+                    view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_viewpager_page_list, container, false);
 
-                    WearableListView wearableListViewRest = (WearableListView) view.findViewById(R.id.settings_gridviewpager_item_wearablelistview_rest);
-                    wearableListViewRest.setGreedyTouchMode(true);
-                    wearableListViewRest.setAdapter(new WearableListViewAdapter(mContext, ARRAY_REST_TIME));
-                    wearableListViewRest.setClickListener(new WearableListView.ClickListener() {
+                    textView = (TextView) view.findViewById(R.id.settings_viewpager_page_textview);
+                    textView.setText(getString(R.string.settings_gridviewpager_item_textview_rest));
+
+                    wearableListView = (WearableListView) view.findViewById(R.id.settings_viewpager_page_wearablelistview);
+                    wearableListView.setGreedyTouchMode(true);
+                    wearableListView.setAdapter(new WearableListViewAdapter(mContext, ARRAY_REST_TIME));
+                    wearableListView.setClickListener(new WearableListView.ClickListener() {
                         @Override
                         public void onClick(WearableListView.ViewHolder viewHolder) {
-                            mGridViewPager.setCurrentItem(0, column + 1, true);
+                                mViewPager.setCurrentItem(position + 1, true);
                         }
 
                         @Override
@@ -100,23 +111,24 @@ public class SettingsActivity extends Activity {
 
                         }
                     });
-                    wearableListViewRest.addOnCentralPositionChangedListener(new WearableListView.OnCentralPositionChangedListener() {
+                    wearableListView.addOnCentralPositionChangedListener(new WearableListView.OnCentralPositionChangedListener() {
                         @Override
                         public void onCentralPositionChanged(int i) {
                             mSelectedRestTime = i;
                         }
                     });
-                    wearableListViewRest.scrollToPosition(Utils.getSharedPreferences(mContext)
+                    wearableListView.scrollToPosition(Utils.getSharedPreferences(mContext)
                             .getInt(getString(R.string.shared_preferences_settings_rest_time), (ARRAY_NUMBER_OF_SETS.length / 2) - 1));
-                    viewGroup.addView(view);
+                    container.addView(view);
                     break;
                 case 2:
-                    view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_gridviewpager_item_done, viewGroup, false);
-                    CircledImageView circledImageView = (CircledImageView) view.findViewById(R.id.settings_circledimageview_done);
+                    view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settings_viewpager_page_action, container, false);
+
+                    circledImageView = (CircledImageView) view.findViewById(R.id.settings_viewpager_page_circledimageview);
+                    circledImageView.setImageResource(R.mipmap.ic_arrow_forward);
                     circledImageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
                             Utils.getSharedPreferencesEditor(mContext)
                                     .putInt(getString(R.string.shared_preferences_settings_number_of_sets), mSelectedNumberOfSets)
                                     .putInt(getString(R.string.shared_preferences_settings_rest_time), mSelectedRestTime)
@@ -130,20 +142,19 @@ public class SettingsActivity extends Activity {
                             finish();
                         }
                     });
-                    viewGroup.addView(view);
+                    container.addView(view);
                     break;
             }
             return view;
         }
-
-        @Override
-        public void destroyItem(ViewGroup viewGroup, int i, int i1, Object o) {
-            viewGroup.removeView((View) o);
-        }
-
         @Override
         public boolean isViewFromObject(View view, Object o) {
             return view == o;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
         }
     }
 }

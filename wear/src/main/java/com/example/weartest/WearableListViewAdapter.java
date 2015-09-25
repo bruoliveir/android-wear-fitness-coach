@@ -9,21 +9,19 @@ import android.widget.TextView;
 
 final class WearableListViewAdapter extends WearableListView.Adapter {
     private String[] mItems;
-    private final Context mContext;
     private final LayoutInflater mInflater;
 
     public WearableListViewAdapter(Context context, String[] items) {
-        mContext = context;
         mInflater = LayoutInflater.from(context);
         mItems = items;
     }
 
     public static class ItemViewHolder extends WearableListView.ViewHolder {
-        private TextView textViewNumber;
+        private TextView textView;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            textViewNumber = (TextView) itemView.findViewById(R.id.settings_wearablelistview_item_textview);
+            textView = (TextView) itemView.findViewById(R.id.settings_wearablelistview_item_textview);
         }
     }
 
@@ -34,10 +32,10 @@ final class WearableListViewAdapter extends WearableListView.Adapter {
 
     @Override
     public void onBindViewHolder(WearableListView.ViewHolder holder, int position) {
-        ItemViewHolder itemHolder = (ItemViewHolder) holder;
+        ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
-        TextView textViewNumber = itemHolder.textViewNumber;
-        textViewNumber.setText(mItems[position]);
+        TextView textView = itemViewHolder.textView;
+        textView.setText(mItems[position]);
 
         holder.itemView.setTag(position);
     }

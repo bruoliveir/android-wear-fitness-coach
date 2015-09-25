@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="com.example.weartest.SettingsActivity"
     tools:deviceIds="wear">
 
-    <android.support.wearable.view.GridViewPager
+    <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/settings_gridviewpager"
+        android:id="@+id/settings_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </android.support.wearable.view.BoxInsetLayout>
